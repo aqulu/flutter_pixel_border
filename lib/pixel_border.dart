@@ -61,8 +61,8 @@ class PixelBorder extends ShapeBorder {
 
     final tlRadius = getRadius(rrect.tlRadius);
     final trRadius = getRadius(rrect.trRadius);
-    final blRadius = getRadius(rrect.brRadius);
-    final brRadius = getRadius(rrect.blRadius);
+    final blRadius = getRadius(rrect.blRadius);
+    final brRadius = getRadius(rrect.brRadius);
 
     final tlYStart = min(rrect.center.dy, rrect.top + tlRadius);
     final tlXEnd = min(rrect.center.dx, rrect.left + tlRadius);
