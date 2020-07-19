@@ -1,6 +1,6 @@
 # pixel_border
 
-[![pub](https://img.shields.io/badge/pub-1.0.6-blue.svg)](https://pub.dev/packages/pixel_border) ![test](https://github.com/aqulu/flutter_pixel_border/workflows/test/badge.svg) ![lint](https://github.com/aqulu/flutter_pixel_border/workflows/lint/badge.svg)
+[![pub](https://img.shields.io/badge/pub-0.0.1-blue.svg)](https://pub.dev/packages/pixel_border) ![test](https://github.com/aqulu/flutter_pixel_border/workflows/test/badge.svg) ![lint](https://github.com/aqulu/flutter_pixel_border/workflows/lint/badge.svg)
 
 A package to render shapes or borders of widgets with pixelated corners.
 
