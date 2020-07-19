@@ -1,5 +1,7 @@
 # pixel_border
 
+[![pub](https://img.shields.io/badge/pub-1.0.6-blue.svg)](https://pub.dev/packages/pixel_border) ![test](https://github.com/aqulu/flutter_pixel_border/workflows/test/badge.svg) ![lint](https://github.com/aqulu/flutter_pixel_border/workflows/lint/badge.svg)
+
 A package to render shapes or borders of widgets with pixelated corners.
 
 ## Usage
@@ -41,3 +43,5 @@ MaterialApp(
 ```
 
 For corners to be drawn properly, `PixelBorder` requires the radii defined in `borderRadius` to be a multiple of `pixelSize`.
+
+![examples](assets/border_examples.png)
