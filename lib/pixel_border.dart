@@ -52,34 +52,29 @@ class PixelBorder extends ShapeBorder {
   Path _getPath(RRect rrect) {
     assert(borderRadius % pixelSize == BorderRadius.zero);
 
-    final Offset centerLeft = Offset(rrect.left, rrect.center.dy);
-    final Offset centerRight = Offset(rrect.right, rrect.center.dy);
-    final Offset centerTop = Offset(rrect.center.dx, rrect.top);
-    final Offset centerBottom = Offset(rrect.center.dx, rrect.bottom);
+    // check if radii are larger than half of respective side and adjust if necessary
+    final double Function(Radius) getRadius = (Radius radius) {
+      final maxRadius = max(0.0, max(radius.y, radius.x));
+      final side = min(rrect.height, rrect.width);
+      return (min(side / 2, maxRadius) ~/ pixelSize) * pixelSize;
+    };
 
-    final tlYStart = min(centerLeft.dy, rrect.top + max(0.0, rrect.tlRadiusY));
-    final tlXEnd = min(centerTop.dx, rrect.left + max(0.0, rrect.tlRadiusX));
+    final tlRadius = getRadius(rrect.tlRadius);
+    final trRadius = getRadius(rrect.trRadius);
+    final blRadius = getRadius(rrect.brRadius);
+    final brRadius = getRadius(rrect.blRadius);
 
-    final trXStart = max(centerTop.dx, rrect.right - max(0.0, rrect.trRadiusX));
-    final trYEnd = min(centerRight.dy, rrect.top + max(0.0, rrect.trRadiusY));
+    final tlYStart = min(rrect.center.dy, rrect.top + tlRadius);
+    final tlXEnd = min(rrect.center.dx, rrect.left + tlRadius);
 
-    final brYStart = max(
-      centerRight.dy,
-      rrect.bottom - max(0.0, rrect.brRadiusY),
-    );
-    final brXEnd = max(
-      centerBottom.dx,
-      rrect.right - max(0.0, rrect.brRadiusX),
-    );
+    final trXStart = max(rrect.center.dx, rrect.right - trRadius);
+    final trYEnd = min(rrect.center.dy, rrect.top + trRadius);
 
-    final blXStart = min(
-      centerBottom.dx,
-      rrect.left + max(0.0, rrect.blRadiusX),
-    );
-    final blYEnd = max(
-      centerLeft.dy,
-      rrect.bottom - max(0.0, rrect.blRadiusY),
-    );
+    final brYStart = max(rrect.center.dy, rrect.bottom - brRadius);
+    final brXEnd = max(rrect.center.dx, rrect.right - brRadius);
+
+    final blXStart = min(rrect.center.dx, rrect.left + blRadius);
+    final blYEnd = max(rrect.center.dy, rrect.bottom - blRadius);
 
     final List<Offset> vertices = [
       Offset(rrect.left, tlYStart),

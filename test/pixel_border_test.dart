@@ -20,7 +20,7 @@ void main() {
     expect(border.getInnerPath(rect), matcher);
   });
 
-  test('drawing starts from center when height smaller than 2*radius', () {
+  test('radius is truncated when larger than half of height', () {
     const Rect rect = Rect.fromLTRB(10.0, 10.0, 70.0, 30.0);
 
     final matcher = _PathMatcher(
@@ -33,35 +33,35 @@ void main() {
         Offset(20.0, 10.0),
 
         // top right corner
-        Offset(50.0, 10.0),
-        Offset(50.0, 15.0),
-        Offset(55.0, 15.0),
-        Offset(55.0, 20.0),
+        Offset(60.0, 10.0),
+        Offset(60.0, 15.0),
+        Offset(65.0, 15.0),
+        Offset(65.0, 20.0),
         // Offset(60.0, 20.0),
 
         // bottom right corner
         // Offset(60.0, 20.0),
-        Offset(55.0, 20.0),
-        Offset(55.0, 25.0),
-        Offset(50.0, 25.0),
-        Offset(50.0, 30.0),
+        Offset(65.0, 20.0),
+        Offset(65.0, 25.0),
+        Offset(60.0, 25.0),
+        Offset(60.0, 30.0),
 
         // bottom left corner
-        Offset(30.0, 30.0),
-        Offset(30.0, 25.0),
-        Offset(25.0, 25.0),
-        Offset(25.0, 20.0),
+        Offset(20.0, 30.0),
+        Offset(20.0, 25.0),
+        Offset(15.0, 25.0),
+        Offset(15.0, 20.0),
         // Offset(10.0, 20.0),
       ],
       [
         rect.topLeft,
         Offset(25.0, 9.0),
         rect.topRight,
-        Offset(60.0, 21.0),
+        Offset(71.0, 25.0),
         rect.bottomRight,
         Offset(50.0, 31.0),
         rect.bottomLeft,
-        Offset(9.0, 20.0),
+        Offset(9.0, 15.0),
       ],
     );
 
