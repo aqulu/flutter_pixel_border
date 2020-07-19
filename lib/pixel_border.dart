@@ -39,7 +39,11 @@ class PixelBorder extends ShapeBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection textDirection}) => _getPath(
-      borderRadius.resolve(textDirection).toRRect(rect).deflate(pixelSize));
+        borderRadius
+            .resolve(textDirection)
+            .toRRect(rect)
+            .deflate(style == BorderStyle.solid ? pixelSize : 0.0),
+      );
 
   @override
   Path getOuterPath(Rect rect, {TextDirection textDirection}) =>
