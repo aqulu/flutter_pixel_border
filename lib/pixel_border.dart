@@ -143,4 +143,24 @@ class PixelBorder extends ShapeBorder {
         style: style,
         borderColor: borderColor,
       );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PixelBorder &&
+          pixelSize == other.pixelSize &&
+          borderRadius == other.borderRadius &&
+          style == other.style &&
+          borderColor == other.borderColor;
+
+  @override
+  int get hashCode => hashValues(pixelSize, borderRadius);
+
+  @override
+  String toString() => "PixelBorder(\n"
+      "\tpixelSize: $pixelSize,\n"
+      "\borderRadius: $borderRadius,\n"
+      "\tstyle: $style,\n"
+      "\tborderColor: $borderColor,\n"
+      ")";
 }
