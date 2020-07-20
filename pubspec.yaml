@@ -1,6 +1,6 @@
 name: pixel_border
 description: A flutter package providing a ShapeBorder to give the shape or border of widgets a pixel-y look.
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/aqulu/flutter_pixel_border
 
 environment:
