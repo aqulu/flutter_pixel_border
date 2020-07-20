@@ -187,6 +187,74 @@ void main() {
       throwsA(isInstanceOf<AssertionError>()),
     );
   });
+
+  test(
+    'when height is multiple of pixelSize and radius bigger than height / 2 '
+    'radius is recalculated for side to be at least 2*pixelSize high',
+    () {
+      const Rect rect = Rect.fromLTRB(10.0, 10.0, 310.0, 210.0);
+
+      final matcher = _PathMatcher(
+        [
+          // left side
+          Offset(10.0, 90.0),
+          Offset(10.0, 130.0),
+
+          // right side
+          Offset(310.0, 90.0),
+          Offset(310.0, 130.0),
+        ],
+        [
+          // left side
+          Offset(10.0, 89.0),
+          Offset(10.0, 131.0),
+
+          // right side
+          Offset(310.0, 89.0),
+          Offset(310.0, 131.0),
+        ],
+      );
+
+      const PixelBorder border = PixelBorder(
+        borderRadius: BorderRadius.all(Radius.circular(200.0)),
+        pixelSize: 20.0,
+      );
+
+      expect(border.getOuterPath(rect), matcher);
+      expect(border.getInnerPath(rect), matcher);
+    },
+  );
+
+  test(
+    'pixelSize == borderRadius == height/2 == width/2 '
+    'results in rectangle',
+    () {
+      const Rect rect = Rect.fromLTRB(10.0, 10.0, 20.0, 20.0);
+
+      const PixelBorder border = PixelBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        pixelSize: 5.0,
+      );
+
+      final matcher = _PathMatcher(
+        [
+          Offset(10.0, 10.0),
+          Offset(20.0, 10.0),
+          Offset(20.0, 20.0),
+          Offset(10.0, 20.0),
+        ],
+        [
+          Offset(9.0, 9.0),
+          Offset(21.0, 9.0),
+          Offset(21.0, 21.0),
+          Offset(9.0, 21.0),
+        ],
+      );
+
+      expect(border.getOuterPath(rect), matcher);
+      expect(border.getInnerPath(rect), matcher);
+    },
+  );
 }
 
 /// ref: https://github.com/flutter/flutter/blob/4d7525f05c05a6df0b29396bc9eb78c3bf1e9f89/packages/flutter/test/rendering/mock_canvas.dart#L447

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_border/pixel_border.dart';
 
@@ -58,14 +57,15 @@ class Showcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Card(
-                      shape: PixelBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        pixelSize: 5.0,
-                      ),
-                      child: Container(
-                        height: 47.0,
-                        width: 200.0,
-                      )),
+                    shape: PixelBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                      pixelSize: 20.0,
+                    ),
+                    child: Container(
+                      height: 200.0,
+                      width: 350.0,
+                    ),
+                  ),
                 ),
               ],
             ),

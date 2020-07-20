@@ -52,11 +52,12 @@ class PixelBorder extends ShapeBorder {
   Path _getPath(RRect rrect) {
     assert(borderRadius % pixelSize == BorderRadius.zero);
 
-    // check if radii are larger than half of respective side and adjust if necessary
+    // check if radii are larger than half of respective side
+    // adjust radius if necessary, so side is at least 2 * [pixelSize]
     final double Function(Radius) getRadius = (Radius radius) {
       final maxRadius = max(0.0, max(radius.y, radius.x));
       final side = min(rrect.height, rrect.width);
-      return (min(side / 2, maxRadius) ~/ pixelSize) * pixelSize;
+      return (min(side / 2 - pixelSize, maxRadius) ~/ pixelSize) * pixelSize;
     };
 
     final tlRadius = getRadius(rrect.tlRadius);
