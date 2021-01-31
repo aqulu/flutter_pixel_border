@@ -26,8 +26,8 @@ class PixelBorder extends ShapeBorder {
   final Color borderColor;
 
   const PixelBorder({
-    @required this.borderRadius,
-    @required this.pixelSize,
+    required this.borderRadius,
+    required this.pixelSize,
     this.style = BorderStyle.none,
     this.borderColor = const Color(0xFF000000),
   }) : assert(pixelSize > 0);
@@ -38,7 +38,7 @@ class PixelBorder extends ShapeBorder {
       );
 
   @override
-  Path getInnerPath(Rect rect, {TextDirection textDirection}) => _getPath(
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => _getPath(
         borderRadius
             .resolve(textDirection)
             .toRRect(rect)
@@ -46,7 +46,7 @@ class PixelBorder extends ShapeBorder {
       );
 
   @override
-  Path getOuterPath(Rect rect, {TextDirection textDirection}) =>
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) =>
       _getPath(borderRadius.resolve(textDirection).toRRect(rect));
 
   Path _getPath(RRect rrect) {
@@ -120,7 +120,7 @@ class PixelBorder extends ShapeBorder {
   }
 
   @override
-  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
     if (rect.isEmpty || style == BorderStyle.none) return;
 
     final Path path = getOuterPath(rect, textDirection: textDirection)

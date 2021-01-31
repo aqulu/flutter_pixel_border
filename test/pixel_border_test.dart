@@ -265,12 +265,12 @@ class _PathMatcher extends Matcher {
   List<Offset> excludes;
 
   @override
-  bool matches(Object object, Map<dynamic, dynamic> matchState) {
+  bool matches(Object? object, Map<dynamic, dynamic> matchState) {
     if (object is! Path) {
       matchState[this] = 'The given object ($object) was not a Path.';
       return false;
     }
-    final Path path = object as Path;
+    final Path path = object;
     final List<String> errors = <String>[
       for (final Offset offset in includes)
         if (!path.contains(offset))
