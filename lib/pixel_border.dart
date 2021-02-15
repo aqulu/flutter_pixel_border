@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 ///
 /// A ShapeBorder to draw a box with pixelated corners.
 ///
-class PixelBorder extends ShapeBorder {
+class PixelBorder extends OutlinedBorder {
   /// The radii for each corner.
   ///
   /// Each corner [Radius] defines the endpoints that will be connected by
@@ -16,33 +16,39 @@ class PixelBorder extends ShapeBorder {
   final BorderRadiusGeometry borderRadius;
 
   /// size of a "pixel"
-  /// the smaller, the less pixel-y the shape will look
+  /// the smaller, the less pixelated the shape will look
   final double pixelSize;
 
-  /// The style of this border
-  final BorderStyle style;
+  const PixelBorder._(
+    this.borderRadius,
+    this.pixelSize,
+    BorderSide side,
+  ) : super(side: side);
 
-  /// The color of the border (if drawn)
-  final Color borderColor;
-
-  const PixelBorder({
+  /// Creates a PixelBorder shape without rendering its border.
+  const PixelBorder.shape({
     required this.borderRadius,
     required this.pixelSize,
-    this.style = BorderStyle.none,
-    this.borderColor = const Color(0xFF000000),
-  }) : assert(pixelSize > 0);
+  }) : super();
+
+  /// Creates a PixelBorder which will be rendered with [color].
+  /// The width of the border equals [pixelSize]
+  PixelBorder.solid({
+    required BorderRadius borderRadius,
+    required double pixelSize,
+    Color color = const Color(0xFF000000),
+  }) : this._(
+          borderRadius,
+          pixelSize,
+          BorderSide(color: color, width: pixelSize),
+        );
 
   @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(
-        (style == BorderStyle.none) ? 0.0 : pixelSize,
-      );
+  EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) => _getPath(
-        borderRadius
-            .resolve(textDirection)
-            .toRRect(rect)
-            .deflate(style == BorderStyle.solid ? pixelSize : 0.0),
+        borderRadius.resolve(textDirection).toRRect(rect).deflate(side.width),
       );
 
   @override
@@ -121,23 +127,27 @@ class PixelBorder extends ShapeBorder {
 
   @override
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
-    if (rect.isEmpty || style == BorderStyle.none) return;
+    if (rect.isEmpty || side.style == BorderStyle.none) return;
 
     final Path path = getOuterPath(rect, textDirection: textDirection)
       ..addPath(getInnerPath(rect), Offset.zero);
     final paint = Paint()
-      ..color = borderColor
+      ..color = side.color
       ..strokeWidth = pixelSize
       ..style = PaintingStyle.stroke;
     canvas.drawPath(path, paint);
   }
 
   @override
-  ShapeBorder scale(double t) => PixelBorder(
-        borderRadius: borderRadius * t,
-        pixelSize: pixelSize * t,
-        style: style,
-        borderColor: borderColor,
+  ShapeBorder scale(double t) =>
+      PixelBorder._(borderRadius * t, pixelSize * t, side.scale(t));
+
+  @override
+  PixelBorder copyWith({BorderSide? side, BorderRadius? borderRadius}) =>
+      PixelBorder._(
+        borderRadius ?? this.borderRadius,
+        pixelSize,
+        side ?? this.side,
       );
 
   @override
@@ -146,8 +156,7 @@ class PixelBorder extends ShapeBorder {
       other is PixelBorder &&
           pixelSize == other.pixelSize &&
           borderRadius == other.borderRadius &&
-          style == other.style &&
-          borderColor == other.borderColor;
+          side == other.side;
 
   @override
   int get hashCode => hashValues(pixelSize, borderRadius);
@@ -155,8 +164,7 @@ class PixelBorder extends ShapeBorder {
   @override
   String toString() => "PixelBorder(\n"
       "\tpixelSize: $pixelSize,\n"
-      "\borderRadius: $borderRadius,\n"
-      "\tstyle: $style,\n"
-      "\tborderColor: $borderColor,\n"
+      "\tborderRadius: $borderRadius,\n"
+      "\tside: $side,\n"
       ")";
 }

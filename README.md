@@ -1,6 +1,6 @@
 # pixel_border
 
-[![pub](https://img.shields.io/badge/pub-2.0.0--nullsafety.0-blue.svg)](https://pub.dev/packages/pixel_border) ![test](https://github.com/aqulu/flutter_pixel_border/workflows/test/badge.svg) ![lint](https://github.com/aqulu/flutter_pixel_border/workflows/lint/badge.svg)
+[![pub](https://img.shields.io/badge/pub-2.0.0--nullsafety.1-blue.svg)](https://pub.dev/packages/pixel_border) ![test](https://github.com/aqulu/flutter_pixel_border/workflows/test/badge.svg) ![lint](https://github.com/aqulu/flutter_pixel_border/workflows/lint/badge.svg)
 
 A package to render shapes or borders of widgets with pixelated corners.
 
@@ -15,11 +15,10 @@ Drawing an orange square border where all corners are rounded and drawn with "pi
 ```dart
 Container(
   decoration: ShapeDecoration(
-    shape: PixelBorder(
+    shape: PixelBorder.solid(
       borderRadius: BorderRadius.circular(4.0),
       pixelSize: 2.0,
-      style: BorderStyle.solid,
-      borderColor: Colors.orange,
+      color: Colors.orange,
     ),
   ),
   height: 42.0,
@@ -27,15 +26,17 @@ Container(
 );
 ```
 
-Setting the default button shape in MaterialApp:
+Setting the default ElevatedButton shape in MaterialApp:
 
 ```dart
 MaterialApp(
   theme: ThemeData(
-    buttonTheme: ButtonThemeData(
-      shape: PixelBorder(
-        borderRadius: BorderRadius.circular(10),
-        pixelSize: 5,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        shape: PixelBorder.shape(
+          borderRadius: BorderRadius.circular(10),
+          pixelSize: 5,
+        ),
       ),
     ),
   ),
