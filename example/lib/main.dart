@@ -30,10 +30,13 @@ class Showcase extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    shape: PixelBorder.shape(
-                      borderRadius: BorderRadius.circular(10.0),
-                      pixelSize: 5.0,
+                  child: ElevatedButton(
+                    child: SizedBox.shrink(),
+                    style: ElevatedButton.styleFrom(
+                      shape: PixelBorder.shape(
+                        borderRadius: BorderRadius.circular(10.0),
+                        pixelSize: 5.0,
+                      ),
                     ),
                     onPressed: () {},
                   ),

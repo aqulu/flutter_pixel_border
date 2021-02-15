@@ -26,15 +26,17 @@ Container(
 );
 ```
 
-Setting the default button shape in MaterialApp:
+Setting the default ElevatedButton shape in MaterialApp:
 
 ```dart
 MaterialApp(
   theme: ThemeData(
-    buttonTheme: ButtonThemeData(
-      shape: PixelBorder.shape(
-        borderRadius: BorderRadius.circular(10),
-        pixelSize: 5,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        shape: PixelBorder.shape(
+          borderRadius: BorderRadius.circular(10),
+          pixelSize: 5,
+        ),
       ),
     ),
   ),
