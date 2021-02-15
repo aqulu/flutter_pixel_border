@@ -15,11 +15,10 @@ Drawing an orange square border where all corners are rounded and drawn with "pi
 ```dart
 Container(
   decoration: ShapeDecoration(
-    shape: PixelBorder(
+    shape: PixelBorder.solid(
       borderRadius: BorderRadius.circular(4.0),
       pixelSize: 2.0,
-      style: BorderStyle.solid,
-      borderColor: Colors.orange,
+      color: Colors.orange,
     ),
   ),
   height: 42.0,
@@ -33,7 +32,7 @@ Setting the default button shape in MaterialApp:
 MaterialApp(
   theme: ThemeData(
     buttonTheme: ButtonThemeData(
-      shape: PixelBorder(
+      shape: PixelBorder.shape(
         borderRadius: BorderRadius.circular(10),
         pixelSize: 5,
       ),

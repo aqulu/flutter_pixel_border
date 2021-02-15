@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pixel_border/pixel_border.dart';
 
 void main() {
-  test('negative radius are clamped to 0', () {
+  test('negative radii are clamped to 0', () {
     const Rect rect = Rect.fromLTRB(10.0, 20.0, 50.0, 60.0);
 
     final matcher = _PathMatcher(
@@ -11,7 +11,7 @@ void main() {
       [Offset(9.0, 19.0), Offset(51.0, 61.0)],
     );
 
-    const PixelBorder border = PixelBorder(
+    const PixelBorder border = PixelBorder.shape(
       borderRadius: BorderRadius.only(topLeft: Radius.circular(-10)),
       pixelSize: 5.0,
     );
@@ -65,7 +65,7 @@ void main() {
       ],
     );
 
-    const PixelBorder border = PixelBorder(
+    const PixelBorder border = PixelBorder.shape(
       borderRadius: BorderRadius.all(Radius.circular(20.0)),
       pixelSize: 5.0,
     );
@@ -75,15 +75,15 @@ void main() {
   });
 
   test('scaling', () {
-    const halved = PixelBorder(
+    final halved = PixelBorder.shape(
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
       pixelSize: 2.5,
     );
-    const normal = PixelBorder(
+    final normal = PixelBorder.shape(
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
       pixelSize: 5.0,
     );
-    const enlarged = PixelBorder(
+    final enlarged = PixelBorder.shape(
       borderRadius: BorderRadius.all(Radius.circular(15.0)),
       pixelSize: 7.5,
     );
@@ -101,7 +101,7 @@ void main() {
       [Offset(9.0, 19.0), Offset(51.0, 61.0)],
     );
 
-    const PixelBorder border = PixelBorder(
+    const PixelBorder border = PixelBorder.shape(
       borderRadius: BorderRadius.zero,
       pixelSize: 5.0,
     );
@@ -143,7 +143,7 @@ void main() {
       [rect.topLeft, rect.topRight, rect.bottomLeft, rect.bottomRight],
     );
 
-    const PixelBorder border = PixelBorder(
+    const PixelBorder border = PixelBorder.shape(
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
       pixelSize: 5.0,
     );
@@ -155,7 +155,7 @@ void main() {
   test('pixelSize larger than borderRadius', () {
     const Rect rect = Rect.fromLTRB(10.0, 20.0, 50.0, 60.0);
 
-    const PixelBorder border = PixelBorder(
+    const PixelBorder border = PixelBorder.shape(
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
       pixelSize: 10.0,
     );
@@ -173,7 +173,7 @@ void main() {
   test('borderRadius is not multiple of pixelSize', () {
     const Rect rect = Rect.fromLTRB(10.0, 20.0, 50.0, 60.0);
 
-    const PixelBorder border = PixelBorder(
+    const PixelBorder border = PixelBorder.shape(
       borderRadius: BorderRadius.all(Radius.circular(7.0)),
       pixelSize: 5.0,
     );
@@ -215,7 +215,7 @@ void main() {
         ],
       );
 
-      const PixelBorder border = PixelBorder(
+      const PixelBorder border = PixelBorder.shape(
         borderRadius: BorderRadius.all(Radius.circular(200.0)),
         pixelSize: 20.0,
       );
@@ -231,7 +231,7 @@ void main() {
     () {
       const Rect rect = Rect.fromLTRB(10.0, 10.0, 20.0, 20.0);
 
-      const PixelBorder border = PixelBorder(
+      const PixelBorder border = PixelBorder.shape(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         pixelSize: 5.0,
       );

@@ -31,7 +31,7 @@ class Showcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RaisedButton(
-                    shape: PixelBorder(
+                    shape: PixelBorder.shape(
                       borderRadius: BorderRadius.circular(10.0),
                       pixelSize: 5.0,
                     ),
@@ -41,14 +41,13 @@ class Showcase extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(10.0),
                   decoration: ShapeDecoration(
-                    shape: const PixelBorder(
+                    shape: PixelBorder.solid(
                       pixelSize: 2.0,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8.0),
                         bottomRight: Radius.circular(16.0),
                       ),
-                      style: BorderStyle.solid,
-                      borderColor: Colors.purple,
+                      color: Colors.purple,
                     ),
                   ),
                   height: 200,
@@ -57,7 +56,7 @@ class Showcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Card(
-                    shape: PixelBorder(
+                    shape: PixelBorder.shape(
                       borderRadius: BorderRadius.circular(180.0),
                       pixelSize: 20.0,
                     ),
